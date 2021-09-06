@@ -5,11 +5,11 @@ import { toast } from "react-toastify";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
-  const [currentId, setCurrentId] = useState('');
+  const [currentId, setCurrentId] = useState("");
 
   const addOrEditUser = async (userObject) => {
     try {
-      if (currentId === '') {
+      if (currentId === "") {
         await db.collection("users").doc().set(userObject);
         toast("Nuevo usuario agregado", {
           type: "success",
@@ -19,12 +19,12 @@ const Users = () => {
         toast("Usuario actualizado", {
           type: "info",
         });
-        setCurrentId('');
+        setCurrentId("");
       }
     } catch (error) {
-        toast(error, {
-          type: "error",
-        });
+      toast(error, {
+        type: "error",
+      });
     }
   };
 
@@ -52,9 +52,11 @@ const Users = () => {
   }, []);
 
   return (
-    <div>
-      <UsersForm {...{addOrEditUser, currentId, users}} />
-      <div className="col-md-8">
+    <div className="row justify-content-center">
+      <div className="col-5 p-2">
+        <UsersForm {...{ addOrEditUser, currentId, users }} />
+      </div>
+      <div className="col-5 p-2">
         {users.map((user) => {
           return (
             <div className="card mb-1" key={user.id}>
